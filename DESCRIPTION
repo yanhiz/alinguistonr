@@ -1,0 +1,13 @@
+Package: alinguistonr
+Type: Package
+Title: A Linguist on R
+Version: 0.1.0
+Author: Yanis da Cunha
+Maintainer: Yanis da Cunha <yanis.da-cunha@uni-graz.at>
+Description:
+    This package is made for linguists using R.
+    It provides functions to make statistical analysis easier.
+License: None
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
