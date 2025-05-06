@@ -22,19 +22,20 @@
 #' # Fast recoding for multiple variables can be achieved combining `recode()` with `across()`
 #' data <- data %>%
 #'   mutate(across(c('my_variable1','my_variable2'),~recode(.x)))
-
+#'
+#' @export
 recode <- function(var,ref=levels(factor(var))[1],center=T,reduce=F){
   factor <- relevel(factor(var),ref=ref)
   n <- length(levels(factor))
   names <- levels(factor)
   contrast <- contr.treatment(n)
-  colnames(contrast) <- str_c('_',names[2:length(names)])
+  colnames(contrast) <- paste0('_',names[2:length(names)])
   for (level in names[2:length(names)]){
     mean <- mean(ifelse(factor==level,1,0))
     sd <- sd(ifelse(factor==level,1,0))
-    if (center == T & reduce == T){contrast[,str_c('_',level)] <- (contrast[,str_c('_',level)]-mean)/sd}
-    if (center == T & reduce == F){contrast[,str_c('_',level)] <- (contrast[,str_c('_',level)]-mean)}
-    if (center == F & reduce == F){contrast[,str_c('_',level)] <- (contrast[,str_c('_',level)])}
+    if (center == T & reduce == T){contrast[,paste0('_',level)] <- (contrast[,paste0('_',level)]-mean)/sd}
+    if (center == T & reduce == F){contrast[,paste0('_',level)] <- (contrast[,paste0('_',level)]-mean)}
+    if (center == F & reduce == F){contrast[,paste0('_',level)] <- (contrast[,paste0('_',level)])}
   }
   contrasts(factor) <- contrast
   factor

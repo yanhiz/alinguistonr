@@ -34,4 +34,5 @@ data <- data \%>\%
 # Fast recoding for multiple variables can be achieved combining `recode()` with `across()`
 data <- data \%>\%
   mutate(across(c('my_variable1','my_variable2'),~recode(.x)))
+
 }
